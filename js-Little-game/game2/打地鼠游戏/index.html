@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		table{
+			background: url(img/bg.jpg);
+			width: 400px;
+			height: 400px;
+			margin: auto;
+		}
+		tr td{
+			width: 100px;
+			height: 100px;
+			text-align: center;
+		}
+		tr td img{
+			margin-top: 31px;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+	<span id="sum"></span>
+	<table>
+		<caption>打地鼠</caption>
+		<tr>
+			<td><img src="img/keng.jpg"></td>
+			<td><img src="img/keng.jpg"></td>
+			<td><img src="img/keng.jpg"></td>
+		</tr>
+		<tr>
+			<td><img src="img/keng.jpg"></td>
+			<td><img src="img/keng.jpg"></td>
+			<td><img src="img/keng.jpg"></td>
+		</tr>
+		<tr>
+			<td><img src="img/keng.jpg"></td>
+			<td><img src="img/keng.jpg"></td>
+			<td><img src="img/keng.jpg"></td>
+		</tr>
+		
+	</table>
+	
+	<script>
+		//1. 先获取到所有的图片
+		var mouses = document.getElementsByTagName("img");
+		//2. 让老鼠随机在不同的坑里冒出来
+		var num;	//随机出来的坑
+		var sum = 0;
+
+
+		setTimeout("maochulai()",Math.random()*400+800);
+		function maochulai() {
+			num = Math.floor(Math.random() * 9);	//不加1的原因是因为用num做下标、向下取整0+1 = 1
+			mouses[num].src="img/h5.png";
+			mouses[num].setAttribute("onclick","da()");
+			mouses[num].style.marginTop = "0px";
+			setTimeout("goHome()",Math.random()*400+800);
+
+		}
+
+		//3. 老鼠出来的情况1： 被打死了
+		function da() {
+			mouses[num].src="img/h6.png";
+			mouses[num].removeAttribute("onclick");
+			mouses[num].style.marginTop = "3px";
+			sum ++;
+			document.getElementById("sum").innerHTML = "一共打死了" + sum + "只老鼠";
+		}
+		//4. 老鼠出来的情况2： 跑了
+		
+		function goHome() {
+			mouses[num].src="img/keng.jpg";
+			mouses[num].removeAttribute("onclick");
+			mouses[num].style.marginTop = "31px";
+			setTimeout("maochulai()",Math.random()*400+800);
+		}
+		
+	</script>
+</body>
+</html>
